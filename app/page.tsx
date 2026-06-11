@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 const offers = [
@@ -77,21 +78,23 @@ const faqs = [
 
 function NavLink({
   children,
+  href,
   active = false,
 }: {
   children: ReactNode;
+  href: string;
   active?: boolean;
 }) {
   return (
-    <a
-      href="#"
+    <Link
+      href={href}
       className="ostro-nav relative inline-flex h-9 items-center justify-center text-[12px] leading-6 text-black md:text-[20px]"
     >
       {children}
       {active ? (
         <span className="absolute bottom-0 left-1/2 h-0.5 w-[34px] -translate-x-1/2 rounded-full bg-[#cd0f16] md:w-[69px]" />
       ) : null}
-    </a>
+    </Link>
   );
 }
 
@@ -182,9 +185,9 @@ function Header() {
   return (
     <header className="absolute left-1/2 top-8 z-20 w-full max-w-[1140px] -translate-x-1/2 px-6 md:top-[50px]">
       <nav className="grid grid-cols-2 items-start gap-x-6 gap-y-4 text-center sm:grid-cols-5">
-        <NavLink active>Home</NavLink>
-        <NavLink>About Us</NavLink>
-        <a href="#" className="order-first col-span-2 flex justify-center sm:order-none sm:col-span-1">
+        <NavLink href="/" active>Home</NavLink>
+        <NavLink href="/about-us">About Us</NavLink>
+        <Link href="/" className="order-first col-span-2 flex justify-center sm:order-none sm:col-span-1">
           <Image
             src="/ostro/top-logo.png"
             alt="Ostro Italian"
@@ -193,9 +196,9 @@ function Header() {
             priority
             className="h-[44px] w-[94px] object-contain md:h-[54px] md:w-[115px]"
           />
-        </a>
-        <NavLink>Menu</NavLink>
-        <NavLink>Contact Us</NavLink>
+        </Link>
+        <NavLink href="/menu">Menu</NavLink>
+        <NavLink href="/contact-us">Contact Us</NavLink>
       </nav>
     </header>
   );
@@ -423,16 +426,16 @@ function Footer() {
           </h2>
           <ul className="space-y-4 text-[20px] leading-6">
             <li>
-              <a href="#">Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <a href="#menu">Menu</a>
+              <Link href="/menu">Menu</Link>
             </li>
             <li>
-              <a href="#about">About</a>
+              <Link href="/about-us">About</Link>
             </li>
             <li>
-              <a href="#faq">Contact</a>
+              <Link href="/contact-us">Contact</Link>
             </li>
           </ul>
         </div>
@@ -465,13 +468,30 @@ function Footer() {
           .
         </p>
         <div className="flex items-center gap-5">
-          <Image src="/ostro/facebook.png" alt="Facebook" width={30} height={30} />
-          <Image
-            src="/ostro/instagram.png"
-            alt="Instagram"
-            width={20}
-            height={20}
-          />
+          <a href="#" aria-label="Facebook" className="text-white">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="size-[22px]"
+              fill="currentColor"
+            >
+              <path d="M14.2 8.4V6.9c0-.7.5-.9 1-.9h1.5V3.4l-2.1-.1c-2.3 0-3.6 1.4-3.6 3.9v1.2H8.7v2.9H11V21h3.2v-9.7h2.4l.4-2.9h-2.8Z" />
+            </svg>
+          </a>
+          <a href="#" aria-label="Instagram" className="text-white">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="size-[20px]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            >
+              <rect x="4" y="4" width="16" height="16" rx="4" />
+              <circle cx="12" cy="12" r="3.5" />
+              <circle cx="17" cy="7" r="0.9" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
         </div>
       </div>
     </footer>
